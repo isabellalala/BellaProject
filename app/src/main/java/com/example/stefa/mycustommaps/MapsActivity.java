@@ -47,6 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private LocationManager locationManager;
     private String provider;
+    private Location location;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE2 = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE3 = 1;
@@ -88,11 +89,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             addSeedsToMap();
 
             mMap.setMyLocationEnabled(true);
+            location = locationManager.getLastKnownLocation(provider);
+            if (location != null) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+            }
 
-            Location location = locationManager.getLastKnownLocation(provider);
-
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
@@ -104,12 +106,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     return false;
                 }
             });
-
-            //double dist = distFrom(location.getLatitude(), location.getLongitude(), 55.406263, 10.405972);
-            //Toast.makeText(this, dist+"", Toast.LENGTH_SHORT).show();
-
-
-
         } catch (SecurityException e) {
             Toast.makeText(this, "Exception onMapReady"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -142,7 +138,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean inRange(double lat, double lng)
     {
         try {
-            Location location = locationManager.getLastKnownLocation(provider);
+            location = locationManager.getLastKnownLocation(provider);
+
+            if (location == null) {
+                Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show();
+                return false;
+            }
             double range = distFrom(location.getLatitude(), location.getLongitude(), lat, lng);
 
             if (range <= 100) {
@@ -153,7 +154,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "Exception InRange", Toast.LENGTH_SHORT).show();
             return false;
         }
-
     }
 
     public boolean requestPermissions()
