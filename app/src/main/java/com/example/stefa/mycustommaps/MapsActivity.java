@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.content.Context;
 import android.location.Criteria;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Xml;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ import android.util.Log;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
