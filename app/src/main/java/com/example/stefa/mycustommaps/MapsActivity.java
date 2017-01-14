@@ -88,7 +88,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.addSeed:
-                Toast.makeText(this, "Seed Added", Toast.LENGTH_SHORT).show();½
+                Toast.makeText(this, "Seed Added", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
