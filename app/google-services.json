@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "792775372914",
+    "firebase_url": "https://seedit-5288e.firebaseio.com",
+    "project_id": "seedit-5288e",
+    "storage_bucket": "seedit-5288e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792775372914:android:503f2e788b55f913",
+        "android_client_info": {
+          "package_name": "com.example.stefa.mycustommaps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792775372914-art8pfconnplgd2o2fkcopuc5p4v92om.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stefa.mycustommaps",
+            "certificate_hash": "b6e4c6bc926421c579da93f3074350080972f08b"
+          }
+        },
+        {
+          "client_id": "792775372914-jqt5pl85l46iuuqmmpi2d1ab672jr4h0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBLQtFOhlIIidcjTepXhZK6tIQ-m9wm-8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792775372914-jqt5pl85l46iuuqmmpi2d1ab672jr4h0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
