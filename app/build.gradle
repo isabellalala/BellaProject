@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.example.stefa.mycustommaps"
         minSdkVersion 23
@@ -17,6 +17,9 @@ android {
         }
     }
     productFlavors {
+    }
+    dexOptions {
+        javaMaxHeapSize "2g"
     }
 }
 

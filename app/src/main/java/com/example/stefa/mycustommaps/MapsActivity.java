@@ -126,7 +126,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
                         Toast.makeText(getApplicationContext(), "In Range", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Out Off Range", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }
