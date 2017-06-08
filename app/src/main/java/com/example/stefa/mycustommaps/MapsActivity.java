@@ -26,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -126,7 +127,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
                         Toast.makeText(getApplicationContext(), "In Range", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Out Off Range", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }
@@ -142,7 +143,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         ArrayList<Seed> seeds = getSeeds();
 
         for (Seed seed : seeds) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title));
+
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title);
+
+            marker.icon((BitmapDescriptorFactory.fromResource(R.drawable.seedgraphic)));
+
+            mMap.addMarker(marker);
         }
     }
 
