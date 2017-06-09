@@ -23,6 +23,10 @@ public class AddSeedActivity extends AppCompatActivity {
 
     public void saveSeed(View v) {
         EditText seedTitle = (EditText) findViewById(R.id.seedTitle);
+        if (seedTitle.getText().toString().length() == 0){
+            Toast.makeText(this, "No input registered", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String latitude = getIntent().getStringExtra("latitude");
         String longitude = getIntent().getStringExtra("longitude");
         Seed seed = new Seed(seedTitle.getText().toString(), Double.valueOf(latitude), Double.valueOf(longitude));
