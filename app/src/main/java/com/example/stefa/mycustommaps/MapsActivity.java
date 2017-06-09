@@ -172,6 +172,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 public boolean onMarkerClick(Marker marker) {
                     if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
                         Intent intent = new Intent(that, OpenSeed.class);
+                        intent.putExtra("seed", marker.getTitle());
                         startActivity(intent);
                         return true;
                     } else {
