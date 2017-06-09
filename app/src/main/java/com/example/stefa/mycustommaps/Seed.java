@@ -1,8 +1,8 @@
 package com.example.stefa.mycustommaps;
 
-/**
- * Created by stefa on 2016-07-31.
- */
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Seed {
     public String title = null;
     public Double latitude = 0.0;
@@ -11,4 +11,15 @@ public class Seed {
     public String toString() {
         return "Title: "+title+", Lat: "+latitude+", Lng: "+longitude;
     }
+
+    public Seed(){
+
+    }
+
+    public Seed(String title, Double latitude, Double longitude){
+        this.title = title;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
+

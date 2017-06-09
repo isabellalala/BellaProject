@@ -30,6 +30,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -54,6 +59,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager locationManager;
     private String provider;
     private Location location;
+    private DatabaseReference firebaseDB;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE2 = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE3 = 1;
@@ -66,6 +72,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        this.firebaseDB = FirebaseDatabase.getInstance().getReference();
+
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
@@ -73,6 +81,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (SecurityException e) {
             Toast.makeText(this, "Exception onCreate", Toast.LENGTH_SHORT).show();
         }
+
+        //Seed newS = new Seed("Bella's hus", 55.10, 12.22);
+        //firebaseDB.child(newS.title).setValue(newS);
 
     }
 
@@ -112,7 +123,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         boolean fullAccess = requestPermissions();
 
         try {
-            addSeedsToMap();
+            this.firebaseDB.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.e("Count " ,""+dataSnapshot.getChildrenCount());
+
+                    for (DataSnapshot child: dataSnapshot.getChildren()) {
+                        Seed seed = child.getValue(Seed.class);
+                        Log.e("Child key:", ""+seed.title);
+
+                        MarkerOptions marker = new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title);
+
+                        marker.icon((BitmapDescriptorFactory.fromResource(R.drawable.seedgraphic)));
+
+                        mMap.addMarker(marker);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //System.out.println("The read failed: "+databaseError.getCode() +" "+databaseError.getMessage());
+                }
+            });
 
             mMap.setMyLocationEnabled(true);
             location = locationManager.getLastKnownLocation(provider);
@@ -127,7 +159,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
                         Toast.makeText(getApplicationContext(), "In Range", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Out Off Range", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }
@@ -137,23 +169,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-
-    public void addSeedsToMap()
-    {
-        ArrayList<Seed> seeds = getSeeds();
-
-        for (Seed seed : seeds) {
-
-            MarkerOptions marker = new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title);
-
-            marker.icon((BitmapDescriptorFactory.fromResource(R.drawable.seedgraphic)));
-
-            mMap.addMarker(marker);
-        }
-    }
-
     public static double distFrom(double lat1, double lng1, double lat2, double lng2) {
-        double earthRadius = 6371.0; // miles (or 6371.0 kilometers)
+        double earthRadius = 6371.0; // miles (or 6371.0 kilometers) - Fungerer ikke på Mars
         double dLat = Math.toRadians(lat2-lat1);
         double dLng = Math.toRadians(lng2-lng1);
         double sindLat = Math.sin(dLat / 2);
@@ -205,56 +222,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         return true;
-    }
-
-    public ArrayList<Seed> getSeeds() {
-        ArrayList<Seed> seeds = new ArrayList<Seed>();
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            InputStream stream = getAssets().open("seeds.xml");
-            Document doc = builder.parse(stream);
-            Element element = doc.getDocumentElement();
-
-            // get all child nodes
-            NodeList nodes = element.getChildNodes();
-
-            // print the text content of each child
-            for (int i = 0; i < nodes.getLength(); i++) {
-                NodeList seedNodes = nodes.item(i).getChildNodes();
-
-                Seed seed = new Seed();
-                for (int m = 0; m < seedNodes.getLength(); m++) {
-                    Node node = seedNodes.item(m);
-                    if (node.getNodeType() == 3) {
-                        continue;
-                    }
-
-                    if(node.getNodeName().toLowerCase().contains("title")) {
-                        seed.title = node.getTextContent();
-                    }
-
-                    if(node.getNodeName().toLowerCase().contains("latitude")) {
-                        seed.latitude = Double.parseDouble(node.getTextContent());
-                    }
-
-                    if(node.getNodeName().toLowerCase().contains("longitude")) {
-                        seed.longitude = Double.parseDouble(node.getTextContent());
-                    }
-                }
-
-
-
-                if (seed.longitude == 0.0 || seed.latitude == 0.0) {
-                    continue;
-                }
-                Log.d("Seed:", seed.toString());
-                seeds.add(seed);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        return seeds;
     }
 }
