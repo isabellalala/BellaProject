@@ -1,6 +1,7 @@
 package com.example.stefa.mycustommaps;
 
 import android.*;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Point;
@@ -96,16 +97,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.addSeed:
-                Toast.makeText(this, "Seed Added", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        try {
+            // Handle item selection
+            switch (item.getItemId()) {
+                case R.id.addSeed:
+                    location = locationManager.getLastKnownLocation(provider);
+                    Intent intent = new Intent(this, AddSeedActivity.class);
+                    if (location != null) {
+                        intent.putExtra("latitude", String.valueOf(location.getLatitude()));
+                        intent.putExtra("longitude", String.valueOf(location.getLongitude()));
+                    }
+                    startActivity(intent);
+                    return true;
+            }
+        } catch (SecurityException e) {
+            Toast.makeText(this, "Exception onMapReady" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        return super.onOptionsItemSelected(item);
     }
+
+
 
 
     /**
