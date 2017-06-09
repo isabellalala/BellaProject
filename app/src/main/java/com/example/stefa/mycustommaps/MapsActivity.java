@@ -165,11 +165,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
             }
 
+            final MapsActivity that = this;
+
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
-                        Toast.makeText(getApplicationContext(), "In Range", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(that, OpenSeed.class);
+                        startActivity(intent);
+                        return true;
                     } else {
                         Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
                     }

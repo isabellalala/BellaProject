@@ -1,5 +1,6 @@
 package com.example.stefa.mycustommaps;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,14 +25,22 @@ public class AddSeedActivity extends AppCompatActivity {
     public void saveSeed(View v) {
         EditText seedTitle = (EditText) findViewById(R.id.seedTitle);
         if (seedTitle.getText().toString().length() == 0){
-            Toast.makeText(this, "No input registered", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No title registered", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        EditText seedDes = (EditText) findViewById(R.id.seedDescription);
+        if (seedDes.getText().toString().length() == 0){
+            Toast.makeText(this, "No description registered", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String latitude = getIntent().getStringExtra("latitude");
         String longitude = getIntent().getStringExtra("longitude");
-        Seed seed = new Seed(seedTitle.getText().toString(), Double.valueOf(latitude), Double.valueOf(longitude));
+        Seed seed = new Seed(seedTitle.getText().toString(), seedDes.getText().toString(), Double.valueOf(latitude), Double.valueOf(longitude));
 
         firebaseDB.child(seed.title).setValue(seed);
         Toast.makeText(this, seed.toString(), Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

@@ -40,7 +40,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddSeedActivity"></activity>
+        <activity android:name=".AddSeedActivity" />
+        <activity android:name=".OpenSeed"></activity>
     </application>
 
 </manifest>

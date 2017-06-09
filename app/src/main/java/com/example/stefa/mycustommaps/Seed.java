@@ -5,6 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Seed {
     public String title = null;
+    public String description = null;
     public Double latitude = 0.0;
     public Double longitude = 0.0;
 
@@ -16,10 +17,11 @@ public class Seed {
 
     }
 
-    public Seed(String title, Double latitude, Double longitude){
+    public Seed(String title, String description, Double latitude, Double longitude){
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.description = description;
     }
 }
 
