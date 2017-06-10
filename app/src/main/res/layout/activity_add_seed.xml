@@ -51,6 +51,16 @@
         android:layout_alignStart="@+id/seedDescription"
         android:layout_marginStart="22dp" />
 
+    <Button
+        android:id="@+id/uploadPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/takePhotoButton"
+        android:layout_below="@+id/takePhotoButton"
+        android:layout_marginTop="37dp"
+        android:onClick="uploadPhoto"
+        android:text="Upload Photo" />
+
 
 </RelativeLayout>
 

@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -82,6 +83,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (SecurityException e) {
             Toast.makeText(this, "Exception onCreate", Toast.LENGTH_SHORT).show();
         }
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         //Seed newS = new Seed("Bella's hus", 55.10, 12.22);
         //firebaseDB.child(newS.title).setValue(newS);
@@ -170,15 +174,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
-                        Intent intent = new Intent(that, OpenSeed.class);
-                        intent.putExtra("seed", marker.getTitle());
-                        startActivity(intent);
-                        return true;
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
-                    }
-                    return false;
+
+                    Intent intent = new Intent(that, OpenSeed.class);
+                    intent.putExtra("seed", marker.getTitle());
+                    startActivity(intent);
+                    return true;
+
+//                    if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
+//                        Intent intent = new Intent(that, OpenSeed.class);
+//                        intent.putExtra("seed", marker.getTitle());
+//                        startActivity(intent);
+//                        return true;
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
+//                    }
+//                    return false;
                 }
             });
         } catch (SecurityException e) {

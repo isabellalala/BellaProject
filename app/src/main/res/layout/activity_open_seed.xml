@@ -11,20 +11,30 @@
         android:id="@+id/openSeedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:text="TextView"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="49dp"
-        android:text="TextView" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/openSeedDes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/openSeedTitle"
+        android:text="TextView"
         android:layout_below="@+id/openSeedTitle"
-        android:layout_marginTop="59dp"
-        android:text="TextView" />
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/picture_frame"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/openSeedDes"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

@@ -28,9 +28,9 @@ import java.util.Date;
 public class AddSeedActivity extends AppCompatActivity {
 
     private DatabaseReference firebaseDB;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int CAMERA_REQUEST_INTENT = 3322;
     static final int GALLERI_INTENT = 2;
-    static Uri imageUri = null;
+    static String publicImageUrl = null;
     private StorageReference firebaseStorage;
     private ProgressDialog uploadProgressDialog;
 
@@ -44,6 +44,11 @@ public class AddSeedActivity extends AppCompatActivity {
     }
 
     public void takePhoto(View v) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA_REQUEST_INTENT);
+    }
+
+    public void uploadPhoto(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERI_INTENT);
@@ -52,19 +57,31 @@ public class AddSeedActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == GALLERI_INTENT && resultCode == RESULT_OK) {
-            uploadProgressDialog.setMessage("Uploading...");
-            uploadProgressDialog.show();
-
-            imageUri = data.getData();
-
-            firebaseStorage.child("Photos").child(imageUri.getLastPathSegment()).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(AddSeedActivity.this, "Upload done", Toast.LENGTH_SHORT).show();
-                    uploadProgressDialog.dismiss();
-                }
-            });
+            uploadImage(data.getData());
+        } else if (requestCode == CAMERA_REQUEST_INTENT && resultCode == RESULT_OK) {
+            uploadImage(data.getData());
         }
+    }
+
+    protected void uploadImage(Uri imageUri) {
+        if (imageUri == null) {
+            Log.e("AddSeedImage", "No image found");
+            return;
+        }
+        uploadProgressDialog.setMessage("Uploading...");
+        uploadProgressDialog.show();
+
+        firebaseStorage.child("Photos")
+                       .child(imageUri.getLastPathSegment())
+                       .putFile(imageUri)
+                       .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                publicImageUrl = taskSnapshot.getDownloadUrl().toString();
+                Toast.makeText(AddSeedActivity.this, "Upload done", Toast.LENGTH_SHORT).show();
+                uploadProgressDialog.dismiss();
+            }
+        });
     }
 
     public void saveSeed(View v) {
@@ -81,16 +98,20 @@ public class AddSeedActivity extends AppCompatActivity {
             return;
         }
 
-        Log.e("AddSeedImage", imageUri.toString());
-
-        if (imageUri == null) {
+        if (publicImageUrl == null) {
             Toast.makeText(this, "No image registered", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String latitude = getIntent().getStringExtra("latitude");
-        String longitude = getIntent().getStringExtra("longitude");
-        Seed seed = new Seed(seedTitle.getText().toString(), seedDes.getText().toString(), Double.valueOf(latitude), Double.valueOf(longitude));
+        Log.e("AddSeedImage", publicImageUrl);
+
+        Seed seed = new Seed(
+                seedTitle.getText().toString(),
+                seedDes.getText().toString(),
+                Double.valueOf(getIntent().getStringExtra("latitude")),
+                Double.valueOf(getIntent().getStringExtra("longitude")),
+                publicImageUrl
+        );
 
         firebaseDB.child(seed.title).setValue(seed);
         Toast.makeText(this, seed.toString(), Toast.LENGTH_SHORT).show();
