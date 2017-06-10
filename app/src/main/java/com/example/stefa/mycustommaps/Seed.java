@@ -1,13 +1,8 @@
 package com.example.stefa.mycustommaps;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 @IgnoreExtraProperties
 public class Seed {

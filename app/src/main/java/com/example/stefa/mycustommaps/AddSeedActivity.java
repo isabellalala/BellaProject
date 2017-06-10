@@ -66,6 +66,7 @@ public class AddSeedActivity extends AppCompatActivity {
     protected void uploadImage(Uri imageUri) {
         if (imageUri == null) {
             Log.e("AddSeedImage", "No image found");
+            Toast.makeText(AddSeedActivity.this, "Couldn't upload image", Toast.LENGTH_LONG).show();
             return;
         }
         uploadProgressDialog.setMessage("Uploading...");
