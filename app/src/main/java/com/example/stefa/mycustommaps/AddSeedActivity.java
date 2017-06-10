@@ -29,7 +29,7 @@ public class AddSeedActivity extends AppCompatActivity {
 
     private DatabaseReference firebaseDB;
     static final int CAMERA_REQUEST_INTENT = 3322;
-    static final int GALLERI_INTENT = 2;
+    static final int GALLERY_INTENT = 2;
     static String publicImageUrl = null;
     private StorageReference firebaseStorage;
     private ProgressDialog uploadProgressDialog;
@@ -51,15 +51,22 @@ public class AddSeedActivity extends AppCompatActivity {
     public void uploadPhoto(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        startActivityForResult(intent, GALLERI_INTENT);
+        startActivityForResult(intent, GALLERY_INTENT);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == GALLERI_INTENT && resultCode == RESULT_OK) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
             uploadImage(data.getData());
         } else if (requestCode == CAMERA_REQUEST_INTENT && resultCode == RESULT_OK) {
-            uploadImage(data.getData());
+            Uri uri = data.getData();
+
+
+//            Log.e("TakePhoto", data.toString()); data.getExtras().toString();
+
+            //uploadImage(data.getData());
         }
     }
 
