@@ -4,26 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.stefa.mycustommaps.OpenSeed">
+    tools:context="com.example.stefa.mycustommaps.OpenSeed"
+    android:background="@color/colorBackground">
 
 
     <TextView
         android:id="@+id/openSeedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="22dp"
+        android:text="TextView"
+        android:textColorLink="@color/colorTextDark"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/openSeedDes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/openSeedTitle"
-        android:text="TextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@+id/openSeedTitle"
-        android:layout_alignParentStart="true" />
+        android:text="TextView"
+        android:textColorLink="@color/colorTextDark" />
 
     <ImageView
         android:id="@+id/imageView"

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="com.example.stefa.mycustommaps.AddSeedActivity">
 
     <EditText
         android:id="@+id/seedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/saveButton"
         android:layout_marginStart="48dp"
         android:layout_marginTop="34dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Type title here"
+        android:inputType="text"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="60dp" />
 
@@ -24,17 +23,18 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:onClick="saveSeed"
         android:text="Save"
+        android:textColor="@color/colorLightGreen"
         tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="60dp" />
+        tools:layout_editor_absoluteY="60dp"
+        android:layout_marginBottom="110dp" />
 
     <EditText
         android:id="@+id/seedDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/seedTitle"
-        android:layout_below="@+id/seedTitle"
         android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="Type description here"
@@ -44,23 +44,23 @@
         android:id="@+id/takePhotoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="30dp"
+        android:background="@color/colorPrimary"
         android:onClick="takePhoto"
         android:text="Take photo"
-        android:layout_below="@+id/seedDescription"
-        android:layout_alignStart="@+id/seedDescription"
-        android:layout_marginStart="22dp" />
+        android:textColor="@color/colorLightGreen" />
 
     <Button
         android:id="@+id/uploadPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/takePhotoButton"
-        android:layout_below="@+id/takePhotoButton"
         android:layout_marginTop="37dp"
+        android:background="@color/colorPrimary"
         android:onClick="uploadPhoto"
-        android:text="Upload Photo" />
+        android:text="Upload Photo"
+        android:textColor="@color/colorLightGreen" />
 
 
-</RelativeLayout>
+</LinearLayout>
 
