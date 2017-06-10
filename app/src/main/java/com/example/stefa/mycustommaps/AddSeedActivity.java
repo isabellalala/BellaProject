@@ -1,6 +1,7 @@
 package com.example.stefa.mycustommaps;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +15,20 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddSeedActivity extends AppCompatActivity {
 
     private DatabaseReference firebaseDB;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_seed);
         this.firebaseDB = FirebaseDatabase.getInstance().getReference();
+    }
+
+    public void takePhoto(View v) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
     public void saveSeed(View v) {
