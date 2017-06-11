@@ -26,25 +26,51 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="350dp"
         android:padding="10dp"
         app:srcCompat="@android:drawable/picture_frame"
         android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/openSeedDes"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/viewCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/openSeedDes"
+        android:text="text"
+        android:layout_marginEnd="63dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="123dp"
-        android:layout_marginEnd="88dp"
-        android:text="text" />
+        android:layout_alignEnd="@+id/openSeedTitle"
+        android:layout_marginBottom="33dp" />
+
+    <ImageButton
+        android:id="@+id/waterSeed"
+        android:layout_width="190dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorBackground"
+        app:srcCompat="@mipmap/seedicon" />
+
+    <ImageView
+        android:id="@+id/flowerLife"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/seedgraphic"
+        android:layout_above="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/lifeCount"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_alignTop="@+id/flowerLife"
+        android:layout_toEndOf="@+id/flowerLife"
+        android:text="10h"
+        android:textAlignment="center"
+        android:textSize="36sp" />
 
 
 </RelativeLayout>
