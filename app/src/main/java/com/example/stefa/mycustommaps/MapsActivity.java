@@ -146,13 +146,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     for (DataSnapshot child: dataSnapshot.getChildren()) {
                         Seed seed = child.getValue(Seed.class);
-                        Log.e("Child key:", ""+seed.title);
 
-                        MarkerOptions marker = new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title);
-
-                        marker.icon((BitmapDescriptorFactory.fromResource(R.mipmap.seedicon)));
-
-                        mMap.addMarker(marker);
+                        addSeedToMap(seed);
                     }
                 }
 
@@ -194,6 +189,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (SecurityException e) {
             Toast.makeText(this, "Exception onMapReady"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void addSeedToMap(Seed seed)
+    {
+        if (!seed.isActive()){
+            return;
+        }
+
+        MarkerOptions marker = new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title);
+
+        marker.icon((BitmapDescriptorFactory.fromResource(R.mipmap.seedicon)));
+
+        mMap.addMarker(marker);
     }
 
     public static double distFrom(double lat1, double lng1, double lat2, double lng2) {

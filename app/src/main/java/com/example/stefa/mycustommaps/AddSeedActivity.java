@@ -120,7 +120,8 @@ public class AddSeedActivity extends AppCompatActivity {
                 seedDes.getText().toString(),
                 Double.valueOf(getIntent().getStringExtra("latitude")),
                 Double.valueOf(getIntent().getStringExtra("longitude")),
-                publicImageUrl
+                publicImageUrl,
+                System.currentTimeMillis()
         );
 
         firebaseDB.child(seed.title).setValue(seed);
