@@ -49,6 +49,16 @@
         android:layout_below="@+id/openSeedDes"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:id="@+id/viewCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/openSeedDes"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="123dp"
+        android:layout_marginEnd="88dp"
+        android:text="text" />
+
 
 </RelativeLayout>
 

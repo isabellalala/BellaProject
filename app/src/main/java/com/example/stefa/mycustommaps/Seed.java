@@ -3,6 +3,7 @@ package com.example.stefa.mycustommaps;
 
 import android.util.Log;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ public class Seed {
     public String description = null;
     public Double latitude = 0.0;
     public Double longitude = 0.0;
+    public int views = 0;
     public String imageUrl = null;
     public Long createdAt = null;
 
@@ -48,6 +50,13 @@ public class Seed {
             return true;
         }
         return Math.abs(System.currentTimeMillis() - this.createdAt) <= 172800000;
+    }
+
+    public int increaseViewCount()
+    {
+        this.views += 1;
+        FirebaseDatabase.getInstance().getReference().child(this.title).child("views").setValue(this.views);
+        return this.views;
     }
 }
 

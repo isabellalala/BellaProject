@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.text.Text;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +22,7 @@ import java.net.URL;
 
 public class OpenSeed extends AppCompatActivity {
 
-
+    protected boolean firstView = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +31,28 @@ public class OpenSeed extends AppCompatActivity {
 
         DatabaseReference firebaseDB = FirebaseDatabase.getInstance().getReference();
         final String seedTitle = getIntent().getStringExtra("seed");
-        Log.e("OpenSeed", seedTitle);
 
+        Log.e("OpenSeed", seedTitle);
         Log.e("OpenSeed", firebaseDB.child(seedTitle).toString());
+
         final TextView textTitle = (TextView)findViewById(R.id.openSeedTitle);
         final TextView textDescription = (TextView)findViewById(R.id.openSeedDes);
         final ImageView textImage = (ImageView)findViewById(R.id.imageView);
+        final TextView textCounter = (TextView)findViewById(R.id.viewCount);
 
         firebaseDB.child(seedTitle).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Seed seed = dataSnapshot.getValue(Seed.class);
 
+                if (firstView) {
+                    seed.increaseViewCount();
+                    firstView = false;
+                }
+
                 textTitle.setText(seed.title);
                 textDescription.setText(seed.description);
+                textCounter.setText(String.valueOf(seed.views));
                 Picasso.with(OpenSeed.this).load(seed.imageUrl).fit().centerCrop().into(textImage);
             }
 
