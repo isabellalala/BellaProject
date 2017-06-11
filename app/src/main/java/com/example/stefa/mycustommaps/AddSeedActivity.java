@@ -1,7 +1,9 @@
 package com.example.stefa.mycustommaps;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -33,6 +35,7 @@ public class AddSeedActivity extends AppCompatActivity {
     static String publicImageUrl = null;
     private StorageReference firebaseStorage;
     private ProgressDialog uploadProgressDialog;
+    private Uri mCapturedImageURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +47,12 @@ public class AddSeedActivity extends AppCompatActivity {
     }
 
     public void takePhoto(View v) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA_REQUEST_INTENT);
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "Image File name");
+        mCapturedImageURI = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent intentPicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intentPicture.putExtra(MediaStore.EXTRA_OUTPUT, mCapturedImageURI);
+        startActivityForResult(intentPicture,CAMERA_REQUEST_INTENT);
     }
 
     public void uploadPhoto(View v) {
@@ -61,21 +68,16 @@ public class AddSeedActivity extends AppCompatActivity {
         if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
             uploadImage(data.getData());
         } else if (requestCode == CAMERA_REQUEST_INTENT && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-
-
-//            Log.e("TakePhoto", data.toString()); data.getExtras().toString();
-
-            //uploadImage(data.getData());
+            uploadImage(mCapturedImageURI);
         }
     }
 
     protected void uploadImage(Uri imageUri) {
         if (imageUri == null) {
-            Log.e("AddSeedImage", "No image found");
             Toast.makeText(AddSeedActivity.this, "Couldn't upload image", Toast.LENGTH_LONG).show();
             return;
         }
+
         uploadProgressDialog.setMessage("Uploading...");
         uploadProgressDialog.show();
 
