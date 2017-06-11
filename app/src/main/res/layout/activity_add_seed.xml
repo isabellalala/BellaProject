@@ -25,9 +25,8 @@
 
     <Button
         android:id="@+id/takePhotoButton"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="65dp"
-        android:layout_alignbottom="@+id/seedTitle"
         android:layout_alignBottom="@+id/uploadPhoto"
         android:background="@color/colorPrimary"
         android:onClick="takePhoto"
@@ -38,7 +37,7 @@
 
     <Button
         android:id="@+id/uploadPhoto"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="65dp"
         android:background="@color/colorPrimary"
         android:onClick="uploadPhoto"
@@ -46,7 +45,8 @@
         android:text="Upload seed photo"
         android:textColor="@color/colorBackground"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
+    </Button>
 
     <EditText
         android:id="@+id/seedTitle"

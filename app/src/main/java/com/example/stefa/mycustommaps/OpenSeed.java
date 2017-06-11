@@ -22,7 +22,7 @@ import java.net.URL;
 
 public class OpenSeed extends AppCompatActivity {
 
-    protected boolean firstView = true;
+    private boolean firstView = true;
     private Seed seed;
 
     @Override

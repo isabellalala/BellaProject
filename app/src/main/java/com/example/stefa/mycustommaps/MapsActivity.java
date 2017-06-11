@@ -171,20 +171,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 @Override
                 public boolean onMarkerClick(Marker marker) {
 
-                    Intent intent = new Intent(that, OpenSeed.class);
-                    intent.putExtra("seed", marker.getTitle());
-                    startActivity(intent);
-                    return true;
-
-//                    if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
-//                        Intent intent = new Intent(that, OpenSeed.class);
-//                        intent.putExtra("seed", marker.getTitle());
-//                        startActivity(intent);
-//                        return true;
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
-//                    }
-//                    return false;
+                    if (inRange(marker.getPosition().latitude, marker.getPosition().longitude)) {
+                        Intent intent = new Intent(that, OpenSeed.class);
+                        intent.putExtra("seed", marker.getTitle());
+                        startActivity(intent);
+                        return true;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Out Of Range", Toast.LENGTH_SHORT).show();
+                    }
+                    return false;
                 }
             });
         } catch (SecurityException e) {
