@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.stefa.mycustommaps.OpenSeed"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:padding="10dp">
 
 
     <TextView
@@ -27,14 +28,13 @@
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="350dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
         android:paddingBottom="20dp"
         app:srcCompat="@android:drawable/picture_frame"
         android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/waterSeed" />
 
     <TextView
         android:id="@+id/viewCount"
@@ -46,20 +46,20 @@
         android:padding="10dp"
         android:text="9"
         android:textAlignment="viewEnd"
-        android:textColor="@color/colorTextDark"
+        android:textColor="@color/colorPrimary"
         android:textSize="30sp" />
 
     <ImageButton
         android:id="@+id/waterSeed"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         android:onClick="AddTime"
         app:srcCompat="@mipmap/wateringcan"
-        android:layout_below="@+id/openSeedTitle"
+        android:layout_alignTop="@+id/lifeCount"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/lifeCount"
-        android:layout_toEndOf="@+id/lifeCount" />
+        android:layout_toEndOf="@+id/lifeCount"
+        android:layout_alignBottom="@+id/lifeCount" />
 
     <ImageView
         android:id="@+id/flowerLife"
@@ -69,20 +69,23 @@
         android:cropToPadding="true"
         android:scaleType="fitCenter"
         app:srcCompat="@mipmap/flowerlife"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/openSeedTitle"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/openSeedTitle"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/lifeCount"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="120h 55m"
-        android:textAlignment="viewStart"
+        android:textAlignment="gravity"
+        android:padding="10dp"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
-        android:layout_below="@+id/openSeedTitle"
-        android:layout_toRightOf="@+id/flowerLife"
-        android:layout_alignBottom="@+id/flowerLife" />
+        android:layout_alignBottom="@+id/flowerLife"
+        android:layout_toEndOf="@+id/flowerLife" />
 
     <ImageView
         android:id="@+id/eye"
