@@ -102,12 +102,6 @@ public class AddSeedActivity extends AppCompatActivity {
             return;
         }
 
-        EditText seedDes = (EditText) findViewById(R.id.seedDescription);
-        if (seedDes.getText().toString().length() == 0){
-            Toast.makeText(this, "No description registered", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         if (publicImageUrl == null) {
             Toast.makeText(this, "No image registered", Toast.LENGTH_SHORT).show();
             return;
@@ -117,7 +111,6 @@ public class AddSeedActivity extends AppCompatActivity {
 
         Seed seed = new Seed(
                 seedTitle.getText().toString(),
-                seedDes.getText().toString(),
                 Double.valueOf(getIntent().getStringExtra("latitude")),
                 Double.valueOf(getIntent().getStringExtra("longitude")),
                 publicImageUrl,

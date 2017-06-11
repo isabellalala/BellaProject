@@ -24,19 +24,6 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/openSeedDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/openSeedTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/openSeedTitle"
-        android:text="TextView"
-        android:textColorLink="@color/colorTextDark" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"

@@ -15,7 +15,6 @@ import java.util.Date;
 @IgnoreExtraProperties
 public class Seed {
     public String title = null;
-    public String description = null;
     public Double latitude = 0.0;
     public Double longitude = 0.0;
     public int views = 0;
@@ -30,11 +29,10 @@ public class Seed {
 
     }
 
-    public Seed(String title, String description, Double latitude, Double longitude, String imageUrl, Long createdAt){
+    public Seed(String title, Double latitude, Double longitude, String imageUrl, Long createdAt){
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.description = description;
         this.imageUrl = imageUrl;
         this.createdAt = createdAt;
     }

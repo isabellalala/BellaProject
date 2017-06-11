@@ -36,7 +36,6 @@ public class OpenSeed extends AppCompatActivity {
         Log.e("OpenSeed", firebaseDB.child(seedTitle).toString());
 
         final TextView textTitle = (TextView)findViewById(R.id.openSeedTitle);
-        final TextView textDescription = (TextView)findViewById(R.id.openSeedDes);
         final ImageView textImage = (ImageView)findViewById(R.id.imageView);
         final TextView textCounter = (TextView)findViewById(R.id.viewCount);
 
@@ -51,7 +50,6 @@ public class OpenSeed extends AppCompatActivity {
                 }
 
                 textTitle.setText(seed.title);
-                textDescription.setText(seed.description);
                 textCounter.setText(String.valueOf(seed.views));
                 Picasso.with(OpenSeed.this).load(seed.imageUrl).fit().centerCrop().into(textImage);
             }
