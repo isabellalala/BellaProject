@@ -3,12 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:id="@+id/addSeed"
+        android:id="@+id/addSeedText"
         android:title="Add Seed"
         android:visible="true"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/plusgraphic" />
+        />
+
+    <item
+    android:id="@+id/addSeed"
+    android:title="Add Seed"
+    android:visible="true"
+    app:showAsAction="ifRoom"
+    android:enabled="true"
+    android:icon="@mipmap/plusgraphic" />
+
+
+
 
 </menu>
