@@ -19,9 +19,8 @@
         tools:layout_editor_absoluteX="300dp"
         tools:layout_editor_absoluteY="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="32dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp" />
 
     <EditText
         android:id="@+id/seedDescription"
@@ -43,9 +42,9 @@
         android:onClick="takePhoto"
         android:text="Take seed photo"
         android:textColor="@color/colorLightGreen"
-        android:layout_marginBottom="111dp"
-        android:layout_alignBottom="@+id/saveButton"
-        android:layout_alignStart="@+id/uploadPhoto" />
+        android:layout_below="@+id/uploadPhoto"
+        android:layout_alignStart="@+id/uploadPhoto"
+        android:layout_marginTop="34dp" />
 
     <Button
         android:id="@+id/uploadPhoto"
@@ -56,9 +55,8 @@
         android:onClick="uploadPhoto"
         android:text="Upload seed photo"
         android:textColor="@color/colorLightGreen"
-        android:layout_below="@+id/seedDescription"
-        android:layout_alignStart="@+id/seedDescription"
-        android:layout_marginTop="62dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/seedDescription" />
 
     <EditText
         android:id="@+id/seedTitle"

@@ -150,7 +150,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         MarkerOptions marker = new MarkerOptions().position(new LatLng(seed.latitude, seed.longitude)).title(seed.title);
 
-                        marker.icon((BitmapDescriptorFactory.fromResource(R.drawable.seedgraphic)));
+                        marker.icon((BitmapDescriptorFactory.fromResource(R.mipmap.seedicon)));
 
                         mMap.addMarker(marker);
                     }
