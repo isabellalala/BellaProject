@@ -12,13 +12,12 @@
         android:id="@+id/openSeedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="22dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="22dp"
+        android:padding="10dp"
+        android:singleLine="true"
         android:text="TextView"
         android:textColorLink="@color/colorTextDark"
         android:textSize="25sp"
@@ -28,7 +27,9 @@
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="350dp"
-        android:padding="10dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="20dp"
         app:srcCompat="@android:drawable/picture_frame"
         android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"
@@ -37,41 +38,62 @@
 
     <TextView
         android:id="@+id/viewCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="text"
-        android:layout_marginEnd="63dp"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/openSeedTitle"
-        android:layout_marginBottom="33dp" />
+        android:layout_toStartOf="@+id/eye"
+        android:background="@color/colorBackground"
+        android:padding="10dp"
+        android:text="9"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/colorTextDark"
+        android:textSize="30sp" />
 
     <ImageButton
         android:id="@+id/waterSeed"
-        android:layout_width="190dp"
-        android:layout_height="70dp"
-        android:layout_above="@+id/imageView"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorBackground"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
         android:onClick="AddTime"
-        app:srcCompat="@mipmap/seedicon" />
+        app:srcCompat="@mipmap/wateringcan"
+        android:layout_below="@+id/openSeedTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/lifeCount"
+        android:layout_toEndOf="@+id/lifeCount" />
 
     <ImageView
         android:id="@+id/flowerLife"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/flowerlife"
         android:layout_alignParentStart="true"
-        app:srcCompat="@drawable/seedgraphic"
-        android:layout_above="@+id/imageView" />
+        android:layout_below="@+id/openSeedTitle"/>
 
     <TextView
         android:id="@+id/lifeCount"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:layout_alignTop="@+id/flowerLife"
-        android:layout_toEndOf="@+id/flowerLife"
-        android:text="10h"
-        android:textAlignment="center"
-        android:textSize="36sp" />
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="120h 55m"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:layout_below="@+id/openSeedTitle"
+        android:layout_toRightOf="@+id/flowerLife"
+        android:layout_alignBottom="@+id/flowerLife" />
+
+    <ImageView
+        android:id="@+id/eye"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/viewCount"
+        android:background="@color/colorBackground"
+        app:srcCompat="@mipmap/eye" />
 
 
 </RelativeLayout>
