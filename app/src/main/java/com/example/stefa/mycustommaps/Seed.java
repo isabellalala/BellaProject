@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 @IgnoreExtraProperties
@@ -19,7 +20,7 @@ public class Seed {
     public Double longitude = 0.0;
     public int views = 0;
     public String imageUrl = null;
-    public Long createdAt = null;
+    public Long expireAt = null;
 
     public String toString() {
         return "Title: "+title+", Lat: "+latitude+", Lng: "+longitude;
@@ -29,12 +30,22 @@ public class Seed {
 
     }
 
-    public Seed(String title, Double latitude, Double longitude, String imageUrl, Long createdAt){
+    public Seed(String title, Double latitude, Double longitude, String imageUrl, Long expireAt){
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
         this.imageUrl = imageUrl;
-        this.createdAt = createdAt;
+        this.expireAt = expireAt;
+    }
+
+    public void increaseExpireDate()
+    {
+        if (this.expireAt == null) {
+            return;
+        }
+        // Add 1 hour.
+        this.expireAt += 3600000;
+        FirebaseDatabase.getInstance().getReference().child(this.title).child("expireAt").setValue(this.expireAt);
     }
 
     /**
@@ -44,10 +55,26 @@ public class Seed {
     public boolean isActive()
     {
         // When no start time is defined the seed stays forever.
-        if (this.createdAt == null) {
+        if (this.expireAt == null) {
             return true;
         }
-        return Math.abs(System.currentTimeMillis() - this.createdAt) <= 172800000;
+        return this.expireAt - System.currentTimeMillis() > 0;
+    }
+
+    /**
+     * Format the expired time in hours
+     * @return String
+     */
+    public String expireForHumans()
+    {
+        if (this.expireAt == null) {
+            return "I NEVER DIE";
+        }
+        Long miliDiff = this.expireAt - System.currentTimeMillis();
+        Long HoursDiff = TimeUnit.MILLISECONDS.toHours(miliDiff);
+        Long minDiff = TimeUnit.MILLISECONDS.toMinutes(miliDiff - TimeUnit.HOURS.toMillis(HoursDiff));
+
+        return String.format("%dh %dm", HoursDiff, minDiff);
     }
 
     public int increaseViewCount()

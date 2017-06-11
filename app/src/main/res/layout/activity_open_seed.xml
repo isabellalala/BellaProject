@@ -52,6 +52,7 @@
         android:layout_above="@+id/imageView"
         android:layout_alignParentEnd="true"
         android:background="@color/colorBackground"
+        android:onClick="AddTime"
         app:srcCompat="@mipmap/seedicon" />
 
     <ImageView

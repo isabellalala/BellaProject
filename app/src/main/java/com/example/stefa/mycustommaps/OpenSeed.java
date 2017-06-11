@@ -23,6 +23,7 @@ import java.net.URL;
 public class OpenSeed extends AppCompatActivity {
 
     protected boolean firstView = true;
+    private Seed seed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,12 @@ public class OpenSeed extends AppCompatActivity {
         final TextView textTitle = (TextView)findViewById(R.id.openSeedTitle);
         final ImageView textImage = (ImageView)findViewById(R.id.imageView);
         final TextView textCounter = (TextView)findViewById(R.id.viewCount);
+        final TextView textExpire = (TextView)findViewById(R.id.lifeCount);
 
         firebaseDB.child(seedTitle).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Seed seed = dataSnapshot.getValue(Seed.class);
+                seed = dataSnapshot.getValue(Seed.class);
 
                 if (firstView) {
                     seed.increaseViewCount();
@@ -50,6 +52,7 @@ public class OpenSeed extends AppCompatActivity {
                 }
 
                 textTitle.setText(seed.title);
+                textExpire.setText(seed.expireForHumans());
                 textCounter.setText(String.valueOf(seed.views));
                 Picasso.with(OpenSeed.this).load(seed.imageUrl).fit().centerCrop().into(textImage);
             }
@@ -59,6 +62,11 @@ public class OpenSeed extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void AddTime(View v)
+    {
+        seed.increaseExpireDate();
     }
 
 }

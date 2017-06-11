@@ -114,11 +114,11 @@ public class AddSeedActivity extends AppCompatActivity {
                 Double.valueOf(getIntent().getStringExtra("latitude")),
                 Double.valueOf(getIntent().getStringExtra("longitude")),
                 publicImageUrl,
-                System.currentTimeMillis()
+                (System.currentTimeMillis() + 172800000) // Now + 2 days
         );
 
         firebaseDB.child(seed.title).setValue(seed);
-        Toast.makeText(this, seed.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Seed was Added", Toast.LENGTH_SHORT).show();
         finish();
     }
 }
